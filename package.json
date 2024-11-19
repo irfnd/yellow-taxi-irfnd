@@ -4,6 +4,7 @@
 	"description": "A Yellow Taxi Trip Dashboard using NestJS & ReactJS",
 	"author": "irfnd <irfandiabimanyu@gmail.com>",
 	"scripts": {
+		"build": "turbo build",
 		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"format": "turbo format"

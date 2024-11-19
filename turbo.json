@@ -2,6 +2,12 @@
 	"$schema": "https://turbo.build/schema.json",
 	"ui": "tui",
 	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"inputs": ["$TURBO_DEFAULT$", ".env"],
+			"outputs": ["dist/**"],
+			"env": ["DATABASE_URL", "DATASET_URL", "JWT_SECRET", "JWT_EXPIRES_IN"]
+		},
 		"dev": {
 			"dependsOn": ["^dev"],
 			"cache": false,
