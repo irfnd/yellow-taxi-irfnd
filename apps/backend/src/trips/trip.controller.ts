@@ -6,7 +6,7 @@ import { TripQueryDto } from './dto/trip-query.dto';
 import { TripResponses } from './dto/trip-response.dto';
 import { TripService } from './trip.service';
 
-@Nest.Controller()
+@Nest.Controller('trips')
 @Nest.UseGuards(JwtGuard)
 @Swagger.ApiTags('Trips')
 @Swagger.ApiBearerAuth()
