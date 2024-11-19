@@ -6,14 +6,14 @@
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env"],
 			"outputs": ["dist/**"],
-			"env": ["DATABASE_URL", "DATASET_URL", "JWT_SECRET", "JWT_EXPIRES_IN"]
+			"env": ["URL", "DATABASE_URL", "DATASET_URL", "JWT_SECRET", "JWT_EXPIRES_IN"]
 		},
 		"dev": {
 			"dependsOn": ["^dev"],
 			"cache": false,
 			"persistent": true,
 			"inputs": ["$TURBO_DEFAULT$", ".env"],
-			"env": ["DATABASE_URL", "DATASET_URL", "JWT_SECRET", "JWT_EXPIRES_IN"]
+			"env": ["PORT", "URL", "DATABASE_URL", "DATASET_URL", "JWT_SECRET", "JWT_EXPIRES_IN"]
 		},
 		"lint": { "dependsOn": ["^lint"] },
 		"format": { "dependsOn": ["^format"] }
