@@ -1,0 +1,21 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"ui": "tui",
+	"tasks": {
+		"db:generate": { "cache": false },
+		"db:push": { "cache": false },
+		"build": {
+			"dependsOn": ["^build", "^db:generate"],
+			"inputs": ["$TURBO_DEFAULT$", ".env"],
+			"outputs": ["dist/**"]
+		},
+		"dev": {
+			"dependsOn": ["^dev"],
+			"cache": false,
+			"persistent": true,
+			"inputs": ["$TURBO_DEFAULT$", ".env"]
+		},
+		"lint": { "dependsOn": ["^lint"] },
+		"format": { "dependsOn": ["^format"] }
+	}
+}
