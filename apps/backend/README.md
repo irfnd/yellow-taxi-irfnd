@@ -50,9 +50,7 @@ email: `admin@mail.com` pass: `YellowTaxi@2024`
   If you use your local database you can setup your database by following this step:
 
   ```bash
-  pnpm prisma generate
-  pnpm prisma db push
-  pnpm prisma db seed
+  pnpm db:setup
   ```
 
   otherwise, you can just type:
