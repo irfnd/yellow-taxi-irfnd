@@ -29,8 +29,8 @@ email: `admin@mail.com` pass: `YellowTaxi@2024`
   pnpm install
   ```
 
-- [See Backend Documentation]().
-- [See Frontend Documentation]().
+- [See Backend Documentation](https://github.com/irfnd/yellow-taxi-irfnd/tree/master/apps/backend#yellow-taxi-backend).
+- [See Frontend Documentation](https://github.com/irfnd/yellow-taxi-irfnd/tree/master/apps/frontend#yellow-taxi-frontend).
 - Running all apps in development.
 
   After setup backend and frontend you can back to this parent project folder `yellow-taxi-irfnd`. To running all apps in one time you can type:

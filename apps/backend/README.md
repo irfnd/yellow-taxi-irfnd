@@ -22,7 +22,7 @@ email: `admin@mail.com` pass: `YellowTaxi@2024`
 
 ## Get Started (Backend Only)
 
-- [Back to parent documentation]()
+- [Back to parent documentation](https://github.com/irfnd/yellow-taxi-irfnd/blob/master/README.md#yellow-taxi-app-fullstack).
 - Move to specific app (backend)
   ```bash
   cd yellow-taxi-irfnd/apps/backend
@@ -67,7 +67,7 @@ email: `admin@mail.com` pass: `YellowTaxi@2024`
   cd ../..
   ```
 
-- [See Frontend documentation]()
+- [See Frontend Documentation](https://github.com/irfnd/yellow-taxi-irfnd/tree/master/apps/frontend#yellow-taxi-frontend).
 
 ## Running (Backend Only)
 
