@@ -24,7 +24,7 @@ export function transformQuery<T extends TripQueryDto>(query: T, { range, multip
 			else if (multiple.includes(key)) acc.push(multipleQuery(key as string, value));
 			return acc;
 		}, []);
-		return `$query= SELECT * WHERE ${queryArr.join(' and ')} LIMIT 500`;
+		return `$query= SELECT * WHERE ${queryArr.join(' and ')}`;
 	}
-	return '$limit=500';
+	return '';
 }
