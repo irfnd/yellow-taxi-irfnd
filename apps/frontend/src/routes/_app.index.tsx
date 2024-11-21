@@ -1,4 +1,5 @@
 import { FareAmountChart } from '@/components/dashboard/fare-amount-chart';
+import { Loading } from '@/components/dashboard/loading';
 import { PaymentChart } from '@/components/dashboard/payment-chart';
 import { PaymentDetailChart } from '@/components/dashboard/payment-detail-chart';
 import { TotalTripChart } from '@/components/dashboard/total-trip-chart';
@@ -20,6 +21,7 @@ import * as React from 'react';
 export const Route = createFileRoute('/_app/')({
 	loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(DashboardQuery),
 	component: DashboardComponent,
+	pendingComponent: Loading,
 	staticData: { name: 'Dashboard', title: 'Dashboard | Yellow Taxi' },
 });
 
