@@ -26,12 +26,12 @@ email: `admin@mail.com` pass: `YellowTaxi@2024`
 - [Back to parent documentation](https://github.com/irfnd/yellow-taxi-irfnd/blob/master/README.md#yellow-taxi-app-fullstack).
 - Move to specific app (frontend)
   ```bash
-  cd yellow-taxi-irfnd/apps/frontend
+  cd apps/frontend
   ```
 - Set up environment variables in `.env` file.
 
   ```env
-  VITE_API_URL="https://yellow-taxi-api-irfnd.vercel.app"
+  VITE_API_URL="http://localhost:8080"
   VITE_DATA_STARTDATE="2014-01-01"
   VITE_DATA_ENDDATE="2014-12-01"
   ```
