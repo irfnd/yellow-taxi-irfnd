@@ -25,14 +25,14 @@ email: `admin@mail.com` pass: `YellowTaxi@2024`
 - [Back to parent documentation](https://github.com/irfnd/yellow-taxi-irfnd/blob/master/README.md#yellow-taxi-app-fullstack).
 - Move to specific app (backend)
   ```bash
-  cd yellow-taxi-irfnd/apps/backend
+  cd apps/backend
   ```
 - Set up environment variables in `.env` file.
 
   ```env
   # Server
   PORT=8080
-  URL="https://yellow-taxi-api-irfnd.vercel.app"
+  URL=(Production API URL - Optional)
 
   # Data
   DATABASE_URL="postgresql://yellowtaxi_owner:iO1eBGx7VKQn@ep-ancient-glade-a1arn6f5-pooler.ap-southeast-1.aws.neon.tech/yellow-taxi?sslmode=require"
