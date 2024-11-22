@@ -1,4 +1,4 @@
-import { EmptyChart } from '@/components/dashboard/empty-chart';
+import { EmptyData } from '@/components/ui/empty-data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { useRangeDate, useTotalTrip } from '@/hooks/use-dashboard';
@@ -34,7 +34,7 @@ export function TotalTripChart({ dates, trips }: ChartProps) {
 						</BarChart>
 					</ChartContainer>
 				) : (
-					<EmptyChart />
+					<EmptyData />
 				)}
 			</CardContent>
 		</Card>

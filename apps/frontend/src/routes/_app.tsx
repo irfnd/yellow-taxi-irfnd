@@ -16,7 +16,7 @@ function DashboardOutletComponent() {
 	return (
 		<SidebarProvider>
 			<AppSidebar />
-			<SidebarInset>
+			<SidebarInset className='overflow-scroll'>
 				<AppNavbar />
 				<div className='flex flex-1 flex-col gap-4 p-4 mt-16 group-has-[[data-collapsible=icon]]/sidebar-wrapper:mt-14'>
 					<Outlet />

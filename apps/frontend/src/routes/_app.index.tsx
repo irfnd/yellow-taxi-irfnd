@@ -1,10 +1,10 @@
 import { FareAmountChart } from '@/components/dashboard/fare-amount-chart';
-import { Loading } from '@/components/dashboard/loading';
 import { PaymentChart } from '@/components/dashboard/payment-chart';
 import { PaymentDetailChart } from '@/components/dashboard/payment-detail-chart';
 import { TotalTripChart } from '@/components/dashboard/total-trip-chart';
 import { TripDistanceChart } from '@/components/dashboard/trip-distance-chart';
 import { Button } from '@/components/ui/button';
+import { Loading } from '@/components/ui/loading';
 import { MonthRangePicker } from '@/components/ui/month-range-picker';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useSidebar } from '@/components/ui/sidebar';

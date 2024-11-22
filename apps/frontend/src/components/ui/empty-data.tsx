@@ -1,6 +1,6 @@
 import { IconDatabaseOff } from '@tabler/icons-react';
 
-export function EmptyChart() {
+export function EmptyData() {
 	return (
 		<div className='flex justify-center items-center w-full h-[300px]'>
 			<div className='flex items-center flex-col'>

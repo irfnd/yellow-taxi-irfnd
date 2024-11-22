@@ -1,4 +1,4 @@
-import { EmptyChart } from '@/components/dashboard/empty-chart';
+import { EmptyData } from '@/components/ui/empty-data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { usePaymentType, useRangeDate } from '@/hooks/use-dashboard';
@@ -57,7 +57,7 @@ export function PaymentChart({ dates, trips }: ChartProps) {
 						</PieChart>
 					</ChartContainer>
 				) : (
-					<EmptyChart />
+					<EmptyData />
 				)}
 			</CardContent>
 		</Card>

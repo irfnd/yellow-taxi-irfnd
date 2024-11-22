@@ -17,7 +17,6 @@ email: `admin@mail.com` pass: `YellowTaxi@2024`
 - **Database**: using [Neon PostgreSQL](https://neon.tech/) + [Prisma](https://www.prisma.io)
 - **API Documentation**: using [Scalar Docs](https://scalar.com/)
 - **CI/CD**: deploy on [Vercel](https://vercel.com/)
-- **Git hooks**: with [Husky](https://github.com/typicode/husky) and [Lint-staged](https://github.com/okonet/lint-staged)
 - **Linting**: with [Eslint](https://eslint.org/) and [Prettier](https://prettier.io/)
 
 ## Get Started (Backend Only)

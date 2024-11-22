@@ -17,7 +17,6 @@ email: `admin@mail.com` pass: `YellowTaxi@2024`
 - **Icon Library**: [Tabler Icons](https://tabler.io/icons)
 - **Routing & Fetching**: [Tanstack Router](https://tanstack.com/router/latest) + [Tanstack Query](https://tanstack.com/query/latest)
 - **CI/CD**: deploy on [Vercel](https://vercel.com/)
-- **Git hooks**: [Husky](https://github.com/typicode/husky) + [Lint-staged](https://github.com/okonet/lint-staged)
 - **Linting**: [Eslint](https://eslint.org/) + [Prettier](https://prettier.io/)
 - **Validations**: [Zod](https://zod.dev/)
 

@@ -7,20 +7,13 @@
 		"build": "turbo build",
 		"dev": "turbo dev",
 		"lint": "turbo lint",
-		"format": "turbo format",
-		"prepare": "husky"
+		"format": "turbo format"
 	},
 	"devDependencies": {
-		"husky": "^9.1.7",
-		"lint-staged": "^15.2.10",
 		"turbo": "^2.3.0"
 	},
 	"engines": {
 		"node": "20.x"
 	},
-	"packageManager": "pnpm@9.13.2",
-	"lint-staged": {
-		"apps/*/src/**/*.ts": "turbo lint",
-		"apps/*/src**/*.{ts,tsx,js,mjs,json,md}": "turbo format"
-	}
+	"packageManager": "pnpm@9.13.2"
 }

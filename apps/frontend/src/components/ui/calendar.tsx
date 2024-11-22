@@ -1,5 +1,3 @@
-'use client';
-
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/utils/cn';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
@@ -45,8 +43,8 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
 				...classNames,
 			}}
 			components={{
-				IconLeft: () => <IconChevronLeft className='h-4 w-4' />,
-				IconRight: () => <IconChevronRight className='h-4 w-4' />,
+				IconLeft: ({ ...props }) => <IconChevronLeft className='h-4 w-4' />,
+				IconRight: ({ ...props }) => <IconChevronRight className='h-4 w-4' />,
 			}}
 			{...props}
 		/>

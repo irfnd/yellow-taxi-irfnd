@@ -10,129 +10,127 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as SignInImport } from './routes/sign-in'
-import { Route as AppImport } from './routes/_app'
-import { Route as AppIndexImport } from './routes/_app.index'
-import { Route as AppTripsImport } from './routes/_app.trips'
+import { Route as rootRoute } from './routes/__root';
+import { Route as SignInImport } from './routes/sign-in';
+import { Route as AppImport } from './routes/_app';
+import { Route as AppIndexImport } from './routes/_app.index';
+import { Route as AppTripsImport } from './routes/_app.trips';
 
 // Create/Update Routes
 
 const SignInRoute = SignInImport.update({
-  id: '/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => rootRoute,
-} as any)
+	id: '/sign-in',
+	path: '/sign-in',
+	getParentRoute: () => rootRoute,
+} as any);
 
 const AppRoute = AppImport.update({
-  id: '/_app',
-  getParentRoute: () => rootRoute,
-} as any)
+	id: '/_app',
+	getParentRoute: () => rootRoute,
+} as any);
 
 const AppIndexRoute = AppIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppRoute,
-} as any)
+	id: '/',
+	path: '/',
+	getParentRoute: () => AppRoute,
+} as any);
 
 const AppTripsRoute = AppTripsImport.update({
-  id: '/trips',
-  path: '/trips',
-  getParentRoute: () => AppRoute,
-} as any)
+	id: '/trips',
+	path: '/trips',
+	getParentRoute: () => AppRoute,
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/_app': {
-      id: '/_app'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AppImport
-      parentRoute: typeof rootRoute
-    }
-    '/sign-in': {
-      id: '/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof SignInImport
-      parentRoute: typeof rootRoute
-    }
-    '/_app/trips': {
-      id: '/_app/trips'
-      path: '/trips'
-      fullPath: '/trips'
-      preLoaderRoute: typeof AppTripsImport
-      parentRoute: typeof AppImport
-    }
-    '/_app/': {
-      id: '/_app/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AppIndexImport
-      parentRoute: typeof AppImport
-    }
-  }
+	interface FileRoutesByPath {
+		'/_app': {
+			id: '/_app';
+			path: '';
+			fullPath: '';
+			preLoaderRoute: typeof AppImport;
+			parentRoute: typeof rootRoute;
+		};
+		'/sign-in': {
+			id: '/sign-in';
+			path: '/sign-in';
+			fullPath: '/sign-in';
+			preLoaderRoute: typeof SignInImport;
+			parentRoute: typeof rootRoute;
+		};
+		'/_app/trips': {
+			id: '/_app/trips';
+			path: '/trips';
+			fullPath: '/trips';
+			preLoaderRoute: typeof AppTripsImport;
+			parentRoute: typeof AppImport;
+		};
+		'/_app/': {
+			id: '/_app/';
+			path: '/';
+			fullPath: '/';
+			preLoaderRoute: typeof AppIndexImport;
+			parentRoute: typeof AppImport;
+		};
+	}
 }
 
 // Create and export the route tree
 
 interface AppRouteChildren {
-  AppTripsRoute: typeof AppTripsRoute
-  AppIndexRoute: typeof AppIndexRoute
+	AppTripsRoute: typeof AppTripsRoute;
+	AppIndexRoute: typeof AppIndexRoute;
 }
 
 const AppRouteChildren: AppRouteChildren = {
-  AppTripsRoute: AppTripsRoute,
-  AppIndexRoute: AppIndexRoute,
-}
+	AppTripsRoute: AppTripsRoute,
+	AppIndexRoute: AppIndexRoute,
+};
 
-const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren);
 
 export interface FileRoutesByFullPath {
-  '': typeof AppRouteWithChildren
-  '/sign-in': typeof SignInRoute
-  '/trips': typeof AppTripsRoute
-  '/': typeof AppIndexRoute
+	'': typeof AppRouteWithChildren;
+	'/sign-in': typeof SignInRoute;
+	'/trips': typeof AppTripsRoute;
+	'/': typeof AppIndexRoute;
 }
 
 export interface FileRoutesByTo {
-  '/sign-in': typeof SignInRoute
-  '/trips': typeof AppTripsRoute
-  '/': typeof AppIndexRoute
+	'/sign-in': typeof SignInRoute;
+	'/trips': typeof AppTripsRoute;
+	'/': typeof AppIndexRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/_app': typeof AppRouteWithChildren
-  '/sign-in': typeof SignInRoute
-  '/_app/trips': typeof AppTripsRoute
-  '/_app/': typeof AppIndexRoute
+	__root__: typeof rootRoute;
+	'/_app': typeof AppRouteWithChildren;
+	'/sign-in': typeof SignInRoute;
+	'/_app/trips': typeof AppTripsRoute;
+	'/_app/': typeof AppIndexRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/sign-in' | '/trips' | '/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/sign-in' | '/trips' | '/'
-  id: '__root__' | '/_app' | '/sign-in' | '/_app/trips' | '/_app/'
-  fileRoutesById: FileRoutesById
+	fileRoutesByFullPath: FileRoutesByFullPath;
+	fullPaths: '' | '/sign-in' | '/trips' | '/';
+	fileRoutesByTo: FileRoutesByTo;
+	to: '/sign-in' | '/trips' | '/';
+	id: '__root__' | '/_app' | '/sign-in' | '/_app/trips' | '/_app/';
+	fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  AppRoute: typeof AppRouteWithChildren
-  SignInRoute: typeof SignInRoute
+	AppRoute: typeof AppRouteWithChildren;
+	SignInRoute: typeof SignInRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  AppRoute: AppRouteWithChildren,
-  SignInRoute: SignInRoute,
-}
+	AppRoute: AppRouteWithChildren,
+	SignInRoute: SignInRoute,
+};
 
-export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
