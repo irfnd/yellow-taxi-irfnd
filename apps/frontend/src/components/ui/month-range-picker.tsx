@@ -1,6 +1,6 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/utils/cn';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import * as React from 'react';
 
 const addMonths = (input: Date, months: number) => {
@@ -171,7 +171,7 @@ function MonthRangeCal({
 								'inline-flex items-center justify-center h-7 w-7 p-0 absolute left-1'
 							)}
 						>
-							<ChevronLeft className='opacity-50 h-4 w-4' />
+							<IconChevronLeft className='opacity-50 h-4 w-4' />
 						</button>
 						<button
 							onClick={() => {
@@ -183,7 +183,7 @@ function MonthRangeCal({
 								'inline-flex items-center justify-center h-7 w-7 p-0 absolute right-1'
 							)}
 						>
-							<ChevronRight className='opacity-50 h-4 w-4' />
+							<IconChevronRight className='opacity-50 h-4 w-4' />
 						</button>
 					</div>
 					<div className='text-sm font-medium'>
