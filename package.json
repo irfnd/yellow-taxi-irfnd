@@ -1,19 +1,30 @@
 {
-	"name": "yellow-taxi-irfnd",
-	"version": "1.0.0",
-	"description": "A Yellow Taxi Trip Dashboard using NestJS & ReactJS",
-	"author": "irfnd <irfandiabimanyu@gmail.com>",
-	"scripts": {
-		"build": "turbo build",
-		"dev": "turbo dev",
-		"lint": "turbo lint",
-		"format": "turbo format"
-	},
-	"devDependencies": {
-		"turbo": "^2.3.0"
-	},
-	"engines": {
-		"node": "20.x"
-	},
-	"packageManager": "pnpm@9.13.2"
+  "name": "yellow-taxi-irfnd",
+  "version": "1.0.0",
+  "description": "A Yellow Taxi Trip Dashboard using NestJS & ReactJS",
+  "author": "irfnd <irfandiabimanyu@gmail.com>",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "turbo format",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "turbo": "^2.3.0"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "packageManager": "pnpm@9.14.2",
+  "lint-staged": {
+    "**/*.{ts,tsx,js,mjs}": [
+      "turbo lint --"
+    ],
+    "**/*.{ts,js,mjs,json,md}": [
+      "turbo format --"
+    ]
+  }
 }
