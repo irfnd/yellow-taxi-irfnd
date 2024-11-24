@@ -8,17 +8,18 @@ import {
 	BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { isMatch, Link, useMatches } from '@tanstack/react-router';
+import { Link, useChildMatches } from '@tanstack/react-router';
 import { startCase } from 'es-toolkit';
 import * as React from 'react';
 
 export function AppNavbar() {
-	const matches = useMatches();
-	const matchesCrumbs = matches.filter((match) => isMatch(match, 'staticData.name'));
+	const childMatches = useChildMatches();
 
 	const breadcrumbs = React.useMemo(() => {
-		return matchesCrumbs.map((crumb) => ({ name: crumb.staticData.name, href: crumb.fullPath }));
-	}, [matchesCrumbs]);
+		return childMatches
+			.filter((match) => match.fullPath.slice(-1) !== '/')
+			.map((match) => ({ name: match.staticData.name, href: match.fullPath }));
+	}, [childMatches]);
 
 	return (
 		<header className='flex fixed bg-background/95 border-b-[.5px] w-full h-16 items-center z-50 gap-2 transition-[width,height,padding] ease-linear duration-300 md:pr-[17rem] group-has-[[data-collapsible=icon]]/sidebar-wrapper:pr-[4rem] group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-14'>
@@ -37,7 +38,7 @@ export function AppNavbar() {
 									<BreadcrumbSeparator className='hidden md:block' />
 									<BreadcrumbItem className='hidden md:block'>
 										{i === breadcrumbs.length - 1 ? (
-											<BreadcrumbPage>{startCase(crumb.name!)}</BreadcrumbPage>
+											<BreadcrumbPage className='font-bold'>{startCase(crumb.name!)}</BreadcrumbPage>
 										) : (
 											<BreadcrumbLink asChild>
 												<Link to={crumb.href}>{startCase(crumb.name!)}</Link>
@@ -50,7 +51,7 @@ export function AppNavbar() {
 							<React.Fragment>
 								<BreadcrumbSeparator className='hidden md:block' />
 								<BreadcrumbItem className='hidden md:block'>
-									<BreadcrumbPage>Dashboard</BreadcrumbPage>
+									<BreadcrumbPage className='font-bold'>Dashboard</BreadcrumbPage>
 								</BreadcrumbItem>
 							</React.Fragment>
 						)}

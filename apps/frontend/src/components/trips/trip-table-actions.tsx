@@ -7,7 +7,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Trip } from '@/utils/validations/trip-schema';
 import { IconDots, IconEye } from '@tabler/icons-react';
+import { Link } from '@tanstack/react-router';
 import { Row } from '@tanstack/react-table';
 
 interface DataTableRowActionsProps<TData> {
@@ -28,9 +30,11 @@ export function TripTableActions<TData>(props: DataTableRowActionsProps<TData>) 
 			<DropdownMenuContent align='start' className='w-[160px]'>
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem className='cursor-pointer'>
-					<IconEye className='mr-2 h-4 w-4' />
-					Show Detail
+				<DropdownMenuItem className='cursor-pointer' asChild>
+					<Link to='/trips/detail' search={row.original as Trip}>
+						<IconEye className='mr-2 h-4 w-4' />
+						Show Detail
+					</Link>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

@@ -1,4 +1,4 @@
-import { getDate } from '@/utils/others/parse-date';
+import { getDate } from '@/utils/others/tools';
 import { FilterFn } from '@tanstack/react-table';
 import { isEqual } from 'date-fns';
 

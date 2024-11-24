@@ -94,10 +94,10 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
 								</TableRow>
 							)
 						) : (
-							<TableRow className='hover:bg-white'>
+							<TableRow>
 								<TableCell colSpan={columns.length} className='text-center space-y-2'>
 									{Array.from({ length: table.getState().pagination.pageSize }).map((_, i) => (
-										<Skeleton className='h-5' key={i} />
+										<Skeleton className='h-16' key={i} />
 									))}
 								</TableCell>
 							</TableRow>

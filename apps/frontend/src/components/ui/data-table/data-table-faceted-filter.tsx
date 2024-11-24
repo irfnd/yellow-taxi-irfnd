@@ -12,7 +12,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/utils/cn';
-import { getPaymentType } from '@/utils/others/trip-tools';
+import { getPaymentType } from '@/utils/others/tools';
 import { IconCheck, IconFilterSearch } from '@tabler/icons-react';
 import { Column } from '@tanstack/react-table';
 import { startCase } from 'es-toolkit';

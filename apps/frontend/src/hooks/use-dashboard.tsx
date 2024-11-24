@@ -1,6 +1,5 @@
-import { Dates, getDate, monthOrder } from '@/utils/others/parse-date';
-import { getPaymentType } from '@/utils/others/trip-tools';
-import { Trip } from '@/utils/types/trip-type';
+import { Dates, getDate, getPaymentType, monthOrder } from '@/utils/others/tools';
+import { Trip } from '@/utils/validations/trip-schema';
 import { format, isWithinInterval, lastDayOfMonth } from 'date-fns';
 import { groupBy } from 'es-toolkit';
 import * as React from 'react';

@@ -15,6 +15,9 @@ import { Route as SignInImport } from './routes/sign-in';
 import { Route as AppImport } from './routes/_app';
 import { Route as AppIndexImport } from './routes/_app.index';
 import { Route as AppTripsImport } from './routes/_app.trips';
+import { Route as AppMapsImport } from './routes/_app.maps';
+import { Route as AppTripsIndexImport } from './routes/_app.trips.index';
+import { Route as AppTripsDetailImport } from './routes/_app.trips.detail';
 
 // Create/Update Routes
 
@@ -41,6 +44,24 @@ const AppTripsRoute = AppTripsImport.update({
 	getParentRoute: () => AppRoute,
 } as any);
 
+const AppMapsRoute = AppMapsImport.update({
+	id: '/maps',
+	path: '/maps',
+	getParentRoute: () => AppRoute,
+} as any);
+
+const AppTripsIndexRoute = AppTripsIndexImport.update({
+	id: '/',
+	path: '/',
+	getParentRoute: () => AppTripsRoute,
+} as any);
+
+const AppTripsDetailRoute = AppTripsDetailImport.update({
+	id: '/detail',
+	path: '/detail',
+	getParentRoute: () => AppTripsRoute,
+} as any);
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -59,6 +80,13 @@ declare module '@tanstack/react-router' {
 			preLoaderRoute: typeof SignInImport;
 			parentRoute: typeof rootRoute;
 		};
+		'/_app/maps': {
+			id: '/_app/maps';
+			path: '/maps';
+			fullPath: '/maps';
+			preLoaderRoute: typeof AppMapsImport;
+			parentRoute: typeof AppImport;
+		};
 		'/_app/trips': {
 			id: '/_app/trips';
 			path: '/trips';
@@ -73,18 +101,46 @@ declare module '@tanstack/react-router' {
 			preLoaderRoute: typeof AppIndexImport;
 			parentRoute: typeof AppImport;
 		};
+		'/_app/trips/detail': {
+			id: '/_app/trips/detail';
+			path: '/detail';
+			fullPath: '/trips/detail';
+			preLoaderRoute: typeof AppTripsDetailImport;
+			parentRoute: typeof AppTripsImport;
+		};
+		'/_app/trips/': {
+			id: '/_app/trips/';
+			path: '/';
+			fullPath: '/trips/';
+			preLoaderRoute: typeof AppTripsIndexImport;
+			parentRoute: typeof AppTripsImport;
+		};
 	}
 }
 
 // Create and export the route tree
 
+interface AppTripsRouteChildren {
+	AppTripsDetailRoute: typeof AppTripsDetailRoute;
+	AppTripsIndexRoute: typeof AppTripsIndexRoute;
+}
+
+const AppTripsRouteChildren: AppTripsRouteChildren = {
+	AppTripsDetailRoute: AppTripsDetailRoute,
+	AppTripsIndexRoute: AppTripsIndexRoute,
+};
+
+const AppTripsRouteWithChildren = AppTripsRoute._addFileChildren(AppTripsRouteChildren);
+
 interface AppRouteChildren {
-	AppTripsRoute: typeof AppTripsRoute;
+	AppMapsRoute: typeof AppMapsRoute;
+	AppTripsRoute: typeof AppTripsRouteWithChildren;
 	AppIndexRoute: typeof AppIndexRoute;
 }
 
 const AppRouteChildren: AppRouteChildren = {
-	AppTripsRoute: AppTripsRoute,
+	AppMapsRoute: AppMapsRoute,
+	AppTripsRoute: AppTripsRouteWithChildren,
 	AppIndexRoute: AppIndexRoute,
 };
 
@@ -93,30 +149,38 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren);
 export interface FileRoutesByFullPath {
 	'': typeof AppRouteWithChildren;
 	'/sign-in': typeof SignInRoute;
-	'/trips': typeof AppTripsRoute;
+	'/maps': typeof AppMapsRoute;
+	'/trips': typeof AppTripsRouteWithChildren;
 	'/': typeof AppIndexRoute;
+	'/trips/detail': typeof AppTripsDetailRoute;
+	'/trips/': typeof AppTripsIndexRoute;
 }
 
 export interface FileRoutesByTo {
 	'/sign-in': typeof SignInRoute;
-	'/trips': typeof AppTripsRoute;
+	'/maps': typeof AppMapsRoute;
 	'/': typeof AppIndexRoute;
+	'/trips/detail': typeof AppTripsDetailRoute;
+	'/trips': typeof AppTripsIndexRoute;
 }
 
 export interface FileRoutesById {
 	__root__: typeof rootRoute;
 	'/_app': typeof AppRouteWithChildren;
 	'/sign-in': typeof SignInRoute;
-	'/_app/trips': typeof AppTripsRoute;
+	'/_app/maps': typeof AppMapsRoute;
+	'/_app/trips': typeof AppTripsRouteWithChildren;
 	'/_app/': typeof AppIndexRoute;
+	'/_app/trips/detail': typeof AppTripsDetailRoute;
+	'/_app/trips/': typeof AppTripsIndexRoute;
 }
 
 export interface FileRouteTypes {
 	fileRoutesByFullPath: FileRoutesByFullPath;
-	fullPaths: '' | '/sign-in' | '/trips' | '/';
+	fullPaths: '' | '/sign-in' | '/maps' | '/trips' | '/' | '/trips/detail' | '/trips/';
 	fileRoutesByTo: FileRoutesByTo;
-	to: '/sign-in' | '/trips' | '/';
-	id: '__root__' | '/_app' | '/sign-in' | '/_app/trips' | '/_app/';
+	to: '/sign-in' | '/maps' | '/' | '/trips/detail' | '/trips';
+	id: '__root__' | '/_app' | '/sign-in' | '/_app/maps' | '/_app/trips' | '/_app/' | '/_app/trips/detail' | '/_app/trips/';
 	fileRoutesById: FileRoutesById;
 }
 
@@ -145,6 +209,7 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
     "/_app": {
       "filePath": "_app.tsx",
       "children": [
+        "/_app/maps",
         "/_app/trips",
         "/_app/"
       ]
@@ -152,13 +217,29 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
     "/sign-in": {
       "filePath": "sign-in.tsx"
     },
+    "/_app/maps": {
+      "filePath": "_app.maps.tsx",
+      "parent": "/_app"
+    },
     "/_app/trips": {
       "filePath": "_app.trips.tsx",
-      "parent": "/_app"
+      "parent": "/_app",
+      "children": [
+        "/_app/trips/detail",
+        "/_app/trips/"
+      ]
     },
     "/_app/": {
       "filePath": "_app.index.tsx",
       "parent": "/_app"
+    },
+    "/_app/trips/detail": {
+      "filePath": "_app.trips.detail.tsx",
+      "parent": "/_app/trips"
+    },
+    "/_app/trips/": {
+      "filePath": "_app.trips.index.tsx",
+      "parent": "/_app/trips"
     }
   }
 }

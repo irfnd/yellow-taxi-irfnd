@@ -9,7 +9,7 @@ import { MonthRangePicker } from '@/components/ui/month-range-picker';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useSidebar } from '@/components/ui/sidebar';
 import { cn } from '@/utils/cn';
-import { getDate } from '@/utils/others/parse-date';
+import { getDate } from '@/utils/others/tools';
 import { DashboardQuery } from '@/utils/queries/dashboard-query';
 import { useDocumentTitle } from '@mantine/hooks';
 import { IconCalendar } from '@tabler/icons-react';

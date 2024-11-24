@@ -1,6 +1,6 @@
 import { tripColumns } from '@/components/trips/trip-table-column';
 import { DataTable } from '@/components/ui/data-table/data-table';
-import { Trip } from '@/utils/types/trip-type';
+import { Trip } from '@/utils/validations/trip-schema';
 import { UseSuspenseQueryResult } from '@tanstack/react-query';
 
 interface Props {

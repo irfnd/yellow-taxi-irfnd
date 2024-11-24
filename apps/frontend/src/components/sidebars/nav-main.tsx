@@ -10,8 +10,12 @@ export function NavMain() {
 			<SidebarMenu>
 				{routeList?.map((menu) => (
 					<SidebarMenuItem key={menu.name}>
-						<SidebarMenuButton tooltip={menu.name} isActive={location.pathname === menu.path} asChild>
-							<Link to={menu.path!}>
+						<SidebarMenuButton
+							tooltip={menu.name}
+							isActive={menu.path !== '/' ? location.pathname.includes(menu.path) : location.pathname === menu.path}
+							asChild
+						>
+							<Link to={menu.path}>
 								{menu.icon && <menu.icon />}
 								<span>{menu.name}</span>
 							</Link>
