@@ -1,5 +1,5 @@
 import { FormatNumeralOptions, NumeralThousandGroupStyles } from 'cleave-zen';
-import { addHours } from 'date-fns';
+import { addHours, Duration, intervalToDuration } from 'date-fns';
 
 export async function sleep(ms: number) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
@@ -62,4 +62,15 @@ export const monthOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug
 export function getDate(date: Date | string) {
 	if (typeof date === 'string') return addHours(new Date(date), 7);
 	return addHours(date, 7);
+}
+
+export function getDuration(start: string, end: string) {
+	const duration = intervalToDuration({ start: getDate(start), end: getDate(end) });
+	const durationKeys = Object.keys(duration) as (keyof Duration)[];
+	const formatted = durationKeys.reduce((acc, key) => {
+		const value = duration[key];
+		if (value) acc.push(`${value} ${key}`);
+		return acc;
+	}, [] as string[]);
+	return formatted.join(', ');
 }

@@ -2,10 +2,10 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { useTheme } from '@/components/providers/theme-provider';
 import { useSidebar } from '@/components/ui/sidebar';
+import { useGeoJson } from '@/hooks/use-geojson';
 import { cn } from '@/utils/cn';
 import { useElementSize } from '@mantine/hooks';
 import bbox from '@turf/bbox';
-import { FeatureCollection } from 'geojson';
 import { LineLayerSpecification } from 'mapbox-gl';
 import * as React from 'react';
 import Map, { Layer, MapRef, Marker, NavigationControl, Source } from 'react-map-gl';
@@ -31,13 +31,7 @@ export function TripMaps({ direction }: Props) {
 		return { bounds, fitBoundsOptions: { padding: 50 } };
 	}, [direction]);
 
-	const geoJsonData = React.useMemo<FeatureCollection>(
-		() => ({
-			type: 'FeatureCollection',
-			features: [{ type: 'Feature', properties: null, geometry: direction.routes[0].geometry }],
-		}),
-		[direction]
-	);
+	const geoJsonData = useGeoJson({ direction });
 
 	const lineStyle = React.useMemo<LineLayerSpecification>(
 		() => ({
@@ -61,7 +55,7 @@ export function TripMaps({ direction }: Props) {
 	}, [direction, open, width, height, initialViewState]);
 
 	return (
-		<div ref={mapWrapperRef} className={cn('h-[300px]', open ? 'lg:flex-1 lg:h-full' : 'md:flex-1 md:h-full')}>
+		<div ref={mapWrapperRef} className={cn('h-[275px]', open ? 'lg:flex-1 lg:h-full' : 'md:flex-1 md:h-full')}>
 			<Map
 				ref={mapRef}
 				mapboxAccessToken={MAPBOX_TOKEN}

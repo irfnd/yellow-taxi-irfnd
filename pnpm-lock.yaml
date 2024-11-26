@@ -222,6 +222,9 @@ importers:
       cmdk:
         specifier: 1.0.0
         version: 1.0.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      convert:
+        specifier: ^5.6.1
+        version: 5.6.1
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
@@ -2681,6 +2684,9 @@ packages:
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
+
+  convert@5.6.1:
+    resolution: {integrity: sha512-soawGcYN1XNhtSBzBf7qKFAhmiuBy6ee643ppPPxJUgSYkjZs5mkg/QEf02fS4Iwiycn1YPSm2a4O+QnXQEVZQ==}
 
   cookie-signature@1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
@@ -7216,6 +7222,8 @@ snapshots:
   content-type@1.0.5: {}
 
   convert-source-map@2.0.0: {}
+
+  convert@5.6.1: {}
 
   cookie-signature@1.0.6: {}
 

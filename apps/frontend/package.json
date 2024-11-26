@@ -36,6 +36,7 @@
 		"cleave-zen": "^0.0.17",
 		"clsx": "^2.1.1",
 		"cmdk": "1.0.0",
+		"convert": "^5.6.1",
 		"date-fns": "^3.6.0",
 		"es-toolkit": "^1.27.0",
 		"geojson": "^0.5.0",
