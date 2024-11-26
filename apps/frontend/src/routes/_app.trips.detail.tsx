@@ -1,18 +1,18 @@
 import { TripMaps } from '@/components/trips/trip-maps';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useSidebar } from '@/components/ui/sidebar';
+import { cn } from '@/utils/cn';
 import { DirectionQuery } from '@/utils/queries/direction-query';
 import { tripSchema } from '@/utils/validations/trip-schema';
 import { useDocumentTitle } from '@mantine/hooks';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
-import * as React from 'react';
 
 export const Route = createFileRoute('/_app/trips/detail')({
 	validateSearch: tripSchema,
 	loaderDeps: ({ search }) => {
-		const pickup = [search.pickup_longitude, search.pickup_latitude];
-		const dropoff = [search.dropoff_longitude, search.dropoff_latitude];
-		return { pickup, dropoff };
+		const { pickup_longitude, pickup_latitude, dropoff_longitude, dropoff_latitude } = search;
+		return { pickup: [pickup_longitude, pickup_latitude], dropoff: [dropoff_longitude, dropoff_latitude] };
 	},
 	loader: ({ context: { queryClient }, deps: { pickup, dropoff } }) => {
 		return queryClient.ensureQueryData(DirectionQuery(pickup, dropoff));
@@ -25,13 +25,14 @@ function TripDetailComponent() {
 	const match = Route.useMatch();
 	useDocumentTitle(match.staticData.title!);
 
+	const { open } = useSidebar();
 	const search = Route.useSearch();
 	const { pickup, dropoff } = Route.useLoaderDeps();
 	const direction = useSuspenseQuery(DirectionQuery(pickup, dropoff));
 
 	return (
-		<div className='flex w-full h-full gap-4'>
-			<Card className='w-[350px]'>
+		<div className={cn('flex gap-4 w-full flex-col-reverse', open ? 'lg:flex-1 lg:flex-row' : 'md:flex-1 md:flex-row')}>
+			<Card className={cn('w-full', open ? 'lg:w-[350px]' : 'md:w-[350px]')}>
 				<CardHeader>
 					<CardTitle className='text-xl font-bold'>Trip Detail</CardTitle>
 				</CardHeader>
@@ -57,6 +58,7 @@ function TripDetailComponent() {
 					</div>
 				</CardContent>
 			</Card>
+
 			<TripMaps initialPoint={pickup.map((val) => parseFloat(val))} direction={direction.data} />
 		</div>
 	);

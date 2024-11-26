@@ -1,10 +1,14 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { useTheme } from '@/components/providers/theme-provider';
+import { useSidebar } from '@/components/ui/sidebar';
+import { cn } from '@/utils/cn';
+import { useElementSize } from '@mantine/hooks';
+import bbox from '@turf/bbox';
 import { FeatureCollection } from 'geojson';
 import { LineLayerSpecification } from 'mapbox-gl';
 import * as React from 'react';
-import Map, { Layer, Marker, NavigationControl, Source } from 'react-map-gl';
+import Map, { Layer, MapRef, Marker, NavigationControl, Source } from 'react-map-gl';
 
 interface Props {
 	initialPoint: number[];
@@ -17,24 +21,20 @@ const MAPBOX_LIGHT_MAP = import.meta.env.VITE_MAPBOX_LIGHT_MAP as string;
 
 export function TripMaps({ direction }: Props) {
 	const { theme } = useTheme();
+	const { open } = useSidebar();
+
+	const mapRef = React.useRef<MapRef>(null);
+	const { ref: mapWrapperRef, width, height } = useElementSize();
 
 	const initialViewState = React.useMemo(() => {
 		const bounds = direction.waypoints.map((waypoint: any) => waypoint.location);
-		return { bounds, fitBoundsOptions: { padding: 200 } };
+		return { bounds, fitBoundsOptions: { padding: 50 } };
 	}, [direction]);
 
-	const mapTheme = React.useMemo(() => (theme === 'dark' ? MAPBOX_DARK_MAP : MAPBOX_LIGHT_MAP), [theme]);
-
-	const geojsonData = React.useMemo<FeatureCollection>(
+	const geoJsonData = React.useMemo<FeatureCollection>(
 		() => ({
 			type: 'FeatureCollection',
-			features: [
-				{
-					type: 'Feature',
-					properties: null,
-					geometry: direction.routes[0].geometry,
-				},
-			],
+			features: [{ type: 'Feature', properties: null, geometry: direction.routes[0].geometry }],
 		}),
 		[direction]
 	);
@@ -50,27 +50,41 @@ export function TripMaps({ direction }: Props) {
 		[theme]
 	);
 
+	React.useEffect(() => {
+		if (mapRef.current) {
+			const map = mapRef.current.getMap();
+			const [minLng, minLat, maxLng, maxLat] = bbox(direction.routes[0].geometry);
+			// prettier-ignore
+			map.fitBounds([[minLng, minLat], [maxLng, maxLat]], initialViewState.fitBoundsOptions);
+			map.resize();
+		}
+	}, [direction, open, width, height, initialViewState]);
+
 	return (
-		<Map
-			mapboxAccessToken={MAPBOX_TOKEN}
-			initialViewState={initialViewState}
-			style={{ width: '100%', flex: 1, borderRadius: '0.5rem' }}
-			mapStyle={mapTheme}
-		>
-			<Source id='directionSource' type='geojson' data={geojsonData}>
-				<Layer {...lineStyle} />
-			</Source>
-			<Marker
-				color='hsl(var(--chart-2))'
-				longitude={initialViewState.bounds[0][0]}
-				latitude={initialViewState.bounds[0][1]}
-			/>
-			<Marker
-				color='hsl(var(--chart-2))'
-				longitude={initialViewState.bounds[1][0]}
-				latitude={initialViewState.bounds[1][1]}
-			/>
-			<NavigationControl />
-		</Map>
+		<div ref={mapWrapperRef} className={cn('h-[300px]', open ? 'lg:flex-1 lg:h-full' : 'md:flex-1 md:h-full')}>
+			<Map
+				ref={mapRef}
+				mapboxAccessToken={MAPBOX_TOKEN}
+				initialViewState={initialViewState}
+				mapStyle={theme === 'dark' ? MAPBOX_DARK_MAP : MAPBOX_LIGHT_MAP}
+				style={{ borderRadius: '0.5rem' }}
+				maxZoom={20}
+			>
+				<Source id='directionSource' type='geojson' data={geoJsonData}>
+					<Layer {...lineStyle} />
+				</Source>
+				<Marker
+					color='hsl(var(--chart-2))'
+					longitude={initialViewState.bounds[0][0]}
+					latitude={initialViewState.bounds[0][1]}
+				/>
+				<Marker
+					color='hsl(var(--chart-2))'
+					longitude={initialViewState.bounds[1][0]}
+					latitude={initialViewState.bounds[1][1]}
+				/>
+				<NavigationControl />
+			</Map>
+		</div>
 	);
 }
