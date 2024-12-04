@@ -51,6 +51,11 @@ export const tripColumns: ColumnDef<Trip>[] = [
 				</div>
 			);
 		},
+		sortingFn: (rowA, rowB, columnId) => {
+			const [pickupA, dropoffA] = rowA.getValue<Date[]>(columnId);
+			const [pickupB, dropoffB] = rowB.getValue<Date[]>(columnId);
+			return pickupA.getTime() - pickupB.getTime() || dropoffA.getTime() - dropoffB.getTime();
+		},
 	},
 	{
 		accessorKey: 'passenger_count',

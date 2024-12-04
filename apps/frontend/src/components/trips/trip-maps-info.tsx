@@ -14,8 +14,8 @@ interface Props {
 
 export function TripMapsInfo({ trip, direction }: Props) {
 	const { pickup_datetime, dropoff_datetime } = trip;
-
 	const { open } = useSidebar();
+
 	const info = direction.routes[0]!;
 	const duration = getDuration(pickup_datetime, dropoff_datetime);
 	const distance = Number(convert(info.distance, 'm').to('km')).toPrecision(2);
@@ -81,11 +81,11 @@ export function TripMapsInfo({ trip, direction }: Props) {
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='font-bold'>Tips Amount: </p>
-									<p>${trip.tip_amount}</p>
+									<p>${parseFloat(trip.tip_amount).toLocaleString()}</p>
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='font-bold'>Total Charge: </p>
-									<p>${trip.total_amount}</p>
+									<p>${parseFloat(trip.total_amount).toLocaleString()}</p>
 								</div>
 							</div>
 							<div className='grid grid-cols-1 gap-1'>

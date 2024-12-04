@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
+import { useSidebar } from '@/components/ui/sidebar';
 import { cn } from '@/utils/cn';
 import { getPaymentType } from '@/utils/others/tools';
 import { IconCheck, IconFilterSearch } from '@tabler/icons-react';
@@ -24,6 +25,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
 
 export function DataTableFacetedFilter<TData, TValue>(props: DataTableFacetedFilterProps<TData, TValue>) {
 	const { column, loading } = props;
+	const { isMobile } = useSidebar();
 	const facets = column?.getFacetedUniqueValues();
 	const options = facets ? Array.from(facets?.keys()) : [];
 	const selectedValues = new Set(column?.getFilterValue() as string[]);
@@ -75,7 +77,7 @@ export function DataTableFacetedFilter<TData, TValue>(props: DataTableFacetedFil
 					)}
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className='w-[220px] p-0' align='start'>
+			<PopoverContent className='w-[260px] p-0' align={isMobile ? 'center' : 'start'}>
 				<Command>
 					<CommandInput placeholder={`Search ${startCase(column?.id!)}`} />
 					<CommandList>

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
+import { useSidebar } from '@/components/ui/sidebar';
 import { formatNumberConfig, getDate } from '@/utils/others/tools';
 import { useDebouncedValue } from '@mantine/hooks';
 import { IconFilterSearch, IconStairsDown, IconStairsUp } from '@tabler/icons-react';
@@ -20,6 +21,7 @@ type FilteredValue = Array<number | Date | undefined>;
 
 export function DataTableRangedFilter<TData, TValue>(props: DataTableRangedFilterProps<TData, TValue>) {
 	const { column, loading } = props;
+	const { isMobile } = useSidebar();
 	const filterType = column?.columnDef.meta?.filterType;
 	const ranges = column?.getFacetedMinMaxValues();
 	const values = column?.getFilterValue() as FilteredValue;
@@ -70,7 +72,7 @@ export function DataTableRangedFilter<TData, TValue>(props: DataTableRangedFilte
 					) : null}
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className='w-[260px] p-0' align='start'>
+			<PopoverContent className='w-[260px] p-0' align={isMobile ? 'center' : 'start'}>
 				{['currency', 'number'].includes(filterType!) ? (
 					<div className='flex flex-col justify-center gap-2 p-3'>
 						<div className='relative flex w-full'>
