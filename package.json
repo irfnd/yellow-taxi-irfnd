@@ -18,7 +18,7 @@
   "engines": {
     "node": "20.x"
   },
-  "packageManager": "pnpm@9.14.2",
+  "packageManager": "pnpm@10.26.0",
   "lint-staged": {
     "**/*.{ts,tsx,js,mjs}": [
       "turbo lint --"

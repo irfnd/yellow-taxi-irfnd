@@ -4,7 +4,6 @@
 	"description": "Backend for Yellow Taxi Trip Dashboard using NestJS",
 	"author": "irfnd <irfandiabimanyu@gmail.com>",
 	"scripts": {
-		"vercel-build": "prisma generate && prisma db seed && nest build",
 		"db:setup": "prisma generate && prisma db push && prisma db seed",
 		"build": "prisma generate && prisma db seed && nest build",
 		"dev": "nest start --watch",
