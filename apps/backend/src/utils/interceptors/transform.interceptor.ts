@@ -6,9 +6,14 @@ import { BaseResponse } from '../types/responses.type';
 
 export function UseTransformInterceptor() {
 	@Injectable()
-	class TransformInterceptor<T> implements NestInterceptor<T, BaseResponse> {
-		intercept(ctx: ExecutionContext, next: CallHandler<T>): Observable<BaseResponse> {
-			const code = ctx.switchToHttp().getResponse().statusCode;
+	class TransformInterceptor<T> implements NestInterceptor<T, BaseResponse | T> {
+		intercept(ctx: ExecutionContext, next: CallHandler<T>): Observable<BaseResponse | T> {
+			const request = ctx.switchToHttp().getRequest();
+			const response = ctx.switchToHttp().getResponse();
+
+			if (request.url === '/') return next.handle();
+
+			const code = response.statusCode;
 			return next.handle().pipe(
 				map((data) => {
 					const { message, ...other } = data as { message: string; [key: string]: any };
