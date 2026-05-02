@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build:
+      context: ../..
+      dockerfile: apps/frontend/Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_MAPBOX_DIRECTION_API: ${VITE_MAPBOX_DIRECTION_API}
+        VITE_MAPBOX_TOKEN: ${VITE_MAPBOX_TOKEN}
+        VITE_MAPBOX_DARK_MAP: ${VITE_MAPBOX_DARK_MAP}
+        VITE_MAPBOX_LIGHT_MAP: ${VITE_MAPBOX_LIGHT_MAP}
+        VITE_DATA_STARTDATE: ${VITE_DATA_STARTDATE:-2014-01-01}
+        VITE_DATA_ENDDATE: ${VITE_DATA_ENDDATE:-2014-12-01}
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true

@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ../..
+      dockerfile: apps/backend/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: ${PORT:-8080}
+      URL: ${URL}
+      DATABASE_URL: ${DATABASE_URL}
+      DATASET_URL: ${DATASET_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
+    restart: unless-stopped
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
