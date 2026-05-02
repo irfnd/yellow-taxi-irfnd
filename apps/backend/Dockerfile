@@ -2,6 +2,7 @@
 # docker build -f apps/backend/Dockerfile .
 
 FROM node:20-alpine AS base
+RUN apk add --no-cache openssl
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && corepack prepare pnpm@10.26.0 --activate
